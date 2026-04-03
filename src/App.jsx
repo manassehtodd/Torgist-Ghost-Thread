@@ -4,6 +4,7 @@ import CardDeck from './components/CardDeck'
 import AuraSwitcher from './components/AuraSwitcher'
 import VibeBar from './components/VibeBar'
 import StoryPreview from './components/StoryPreview'
+import FloatingScene from './components/FloatingScene'
 import { useAutoSlicer } from './hooks/useAutoSlicer'
 import { useAuraEngine } from './hooks/useAuraEngine'
 import './App.css'
@@ -32,6 +33,7 @@ export default function App() {
   return (
     <div className="app" data-aura={currentAura}>
       <div className="bg-layer" />
+      <FloatingScene />
       <div className="grain" />
 
       <div>
