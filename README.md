@@ -6,7 +6,7 @@ Torgist lets you drop your stories without your name attached. You write, the ap
 
 No usernames. No followers. Just the story.
 
-**URL :-** [Torgist-Ghost.vercel.app]()
+**URL :-** [Torgist-Ghost.vercel.app](https://ghost-thread.vercel.app/)
 
 ---
 
