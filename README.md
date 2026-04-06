@@ -23,7 +23,7 @@ No usernames. No followers. Just the story.
 ## Tech Stack
 
 - React + Vite
-- TypeScript
+- ReactJS
 - Tailwind CSS
 - Custom hooks: `useAutoSlicer`, `useAuraEngine`
 
