@@ -25,7 +25,6 @@ No usernames. No followers. Just the story.
 - React + Vite
 - TypeScript
 - Tailwind CSS
-- Canvas 2D API (card export)
 - Custom hooks: `useAutoSlicer`, `useAuraEngine`
 
 ---
