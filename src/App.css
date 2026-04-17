@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -227,7 +228,16 @@ body {
   min-width: 100%; padding: 28px 24px 32px;
   display: flex; flex-direction: column; min-height: 300px;
 }
-.slide-text { font-size: 16px; line-height: 1.75; flex: 1; }
+.slide-text { 
+  font-family: 'DM Sans', sans-serif; 
+  font-weight: 800; 
+  font-size: 22px; 
+  line-height: 1.75; 
+  flex: 1; 
+  padding: 20px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word; }
 .slide-emoji { font-size: 40px; margin-bottom: 16px; display: block; }
 
 .carousel-nav {
