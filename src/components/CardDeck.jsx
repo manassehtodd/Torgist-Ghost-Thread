@@ -55,7 +55,7 @@ export default function CardDeck({ cards, auraIndex, onDelete, onReorder }) {
               ✕
             </button>
             <span className="card-emoji">{card.emoji}</span>
-            <div>{card.text}</div>
+            <div style={{'overflow': 'hidden'}}>{card.text}</div>
           </div>
         ))}
       </div>

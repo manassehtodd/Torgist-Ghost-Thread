@@ -1,5 +1,39 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { toPng } from "html-to-image";
+import share from "./../../public/share.svg";
 import { AURAS } from './AuraSwitcher'
+
+const handleShareImage = async (ref, card) => {
+  if (!ref.current) return;
+
+  try {
+    const dataUrl = await toPng(ref.current, {
+      cacheBust: true,
+      pixelRatio: 2
+    });
+
+    // Convert base64 -> blob
+    const blob = await (await fetch(dataUrl)).blob();
+    const file = new File([blob], "card.png", { type: "image/png" });
+
+  // Try native share (moblie)
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({
+      files: [file],
+      title: "Shared Card",
+    });
+  } else {
+    // fallback download
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = "card.png";
+    link.click();
+  }
+} catch (err) {
+  console.error("Image share failed:", err);
+  alert("Sorry, sharing failed. Please try downloading the image instead.");
+}
+};
 
 // Same vibe colors as useAuraEngine
 const VIBE_COLORS = [
@@ -85,7 +119,7 @@ export default function StoryPreview({ cards, auraIndex, onClose }) {
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
 
-        <div className="carousel">
+        <div className="carousel xui-position-relative">
           <div
             className="carousel-track"
             style={{ transform: `translateX(-${index * 100}%)` }}
@@ -93,15 +127,20 @@ export default function StoryPreview({ cards, auraIndex, onClose }) {
           >
             {cards.map((card, i) => {
               const gradient = getCardGradient(card.text)
+              const cardRef = useRef(null);
               return (
                 <div
                   key={card.id}
-                  className="carousel-slide xui-p-2"
+                  ref={cardRef}
+                  className="carousel-slide xui-position-relative xui-p-2"
                   style={{ background: gradient, color: '#f0f0f0' }}
                 >
                   <div className="card-num">Card {i + 1} of {cards.length}</div>
                   <span className="slide-emoji">{card.emoji}</span>
-                  <div className="slide-text">{card.text}</div>
+                  <div className="slide-text" style={{'overflow': 'hidden'}}> {card.text} </div>
+                  <button className="share-button xui-p-0 xui-btn-small xui-bdr-style-hidden xui-d-flex xui-jc-center xui-w-20"   onClick={() => handleShareImage(cardRef, card)}>
+                    <img src={share} alt="Share" className='xui-text-white xui-h-20'/>
+                  </button>
                 </div>
               )
             })}

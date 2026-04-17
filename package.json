@@ -13,6 +13,7 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@richaadgigi/stylexui": "^2.0.16",
+    "html-to-image": "^1.11.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "0.182.0"
