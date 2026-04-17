@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { toPng } from "html-to-image";
 import share from "./../../public/share.svg";
+import download from "./../../public/download.svg";
 import { AURAS } from './AuraSwitcher'
 
 const handleShareImage = async (ref, card) => {
@@ -34,6 +35,30 @@ const handleShareImage = async (ref, card) => {
   alert("Sorry, sharing failed. Please try downloading the image instead.");
 }
 };
+
+const handleDownloadImage = async (ref, card) => {
+  if (!ref.current) return;
+
+  try {
+    const dataUrl = await toPng(ref.current, {
+      cacheBust: true,
+      pixelRatio: 2
+    });
+
+    // Convert base64 -> blob
+    const blob = await (await fetch(dataUrl)).blob();
+    const file = new File([blob], "card.png", { type: "image/png" });
+
+    // Trigger download
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = "card.png";
+    link.click();
+  } catch (err) {
+    console.error("Image download failed:", err);
+    alert("Sorry, downloading failed. Please try again.");
+  }
+}
 
 // Same vibe colors as useAuraEngine
 const VIBE_COLORS = [
@@ -138,9 +163,15 @@ export default function StoryPreview({ cards, auraIndex, onClose }) {
                   <div className="card-num">Card {i + 1} of {cards.length}</div>
                   <span className="slide-emoji">{card.emoji}</span>
                   <div className="slide-text" style={{'overflow': 'hidden'}}> {card.text} </div>
+                  <div className='xui-d-flex xui-flex-jc-space-between'>
                   <button className="share-button xui-p-0 xui-btn-small xui-bdr-style-hidden xui-d-flex xui-jc-center xui-w-20"   onClick={() => handleShareImage(cardRef, card)}>
                     <img src={share} alt="Share" className='xui-text-white xui-h-20'/>
                   </button>
+
+                  <button className='download-button xui-btn-small xui-bdr-style-hidden xui-d-flex xui-jc-center xui-w-20' onClick={() => handleDownloadImage(cardRef, card)}>
+                    <img src={download} alt="download" className='xui-text-white xui-h-20'/>
+                  </button>
+                  </div>
                 </div>
               )
             })}
