@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const CHAR_LIMIT = 150
+const CHAR_LIMIT = 200
 const GHOSTS = ['👻', '🌑', '🎭', '🌫️', '💭', '🫥', '🕳️']
 
 const VIBES = [

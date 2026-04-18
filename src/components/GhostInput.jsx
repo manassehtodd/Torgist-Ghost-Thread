@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 
-const CHAR_LIMIT = 150
+const CHAR_LIMIT = 200
 
 export default function GhostInput({ value, onChange }) {
   const ref = useRef(null)
   const currentLen = value.length % CHAR_LIMIT
-  const near = currentLen > 120 && currentLen < CHAR_LIMIT
+  const near = currentLen > 180 && currentLen < CHAR_LIMIT
 
   return (
     <div className="input-wrap">
